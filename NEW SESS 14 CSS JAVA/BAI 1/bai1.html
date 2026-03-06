@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>Danh sach san pham cho tet</h1>
+<ul id ="product-list">
+
+</ul>
+<form id = "product-form">
+    <input type="text" id = "product-name" placeholder = "Ten san pham" >
+    <input type="number" id = "product-price" placeholder = "Gia san pham" >
+    <button type="submit" id = "submitter">Them san pham</button>
+</form>
+</body>
+    <script>
+        const productlist = document.getElementById(`product-list`);
+        const productName = document.getElementById(`product-name`);
+        const productPrice = document.getElementById(`product-price`);
+        const sumbitbtn  = document.getElementById(`submitter`);
+        const productInput = document.getElementById(`product-name`)
+        const productPriceInput = document.getElementById(`product-price`)
+
+        const products = [
+            {id : 1, name: "Banh chung" ,price: 150000},
+            {id : 2, name: "Gio lua" ,price: 150000},
+
+        ]
+
+        function renderProducts(){
+            productlist.innerHTML = ""
+            products.forEach(product => {
+                productlist.innerHTML += `<div class="product">San pham ${product.id} : ${product.name} - Gia tien : ${product.price} <button id = "delete-things">Xoa hang</button><button id = "add-cart">Them hang vao gio</button></div>`;
+            })
+        }
+
+
+       
+        sumbitbtn.addEventListener("click",addProducts)
+        function addProducts(e){
+            e.preventDefault()
+            let productValue = productInput.value 
+            let productPriceInputValue = productPrice.value
+            
+            let newProduct = {
+                id : products.length + 1,
+                name: productValue,
+                price: productPriceInputValue,
+            }
+            products.push(newProduct);
+            renderProducts();
+            productInput.value = ""
+            productPrice.value = ""
+           
+        }
+     renderProducts()
+
+    </script>
+</html>
